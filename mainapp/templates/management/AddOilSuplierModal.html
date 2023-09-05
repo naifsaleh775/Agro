@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %} 
+
+
+ <div class='container mt-5'>
+    <b><h3 class="muted text-center ">Add New Oil Supplier</h3></b>
+    <form class='form-control container' method="POST" action="{% url 'add_oil_suplier_modal' %}">
+     {% csrf_token %}
+      
+     <div class="mb-3 mt-3">
+         <input type="text" class="form-control text-center" required name="oil_company" placeholder="Oil Company">
+       </div>
+       <div class="mb-3 mt-3">
+           <input type="text" class="form-control text-center" required name="oil_name" placeholder="Oil Name">
+         </div>
+         <div class="mb-3 mt-3">
+           <input type="decimal" class="form-control text-center" required name="oil_quantity" placeholder="Oil Quantity">
+         </div>
+         <div class="mb-3 mt-3">
+           <input type="decimal" class="form-control text-center" required name="oil_price" placeholder="Oil Price">
+         </div>
+         <div class="mb-3 mt-3">
+           <input type="decimal" class="form-control text-center" required name="oil_month_selling" placeholder="Oil Month Selling">
+         </div>
+         {% comment %} <select class="form-select mb-3" name="jerecan_size" aria-label="Default select example" required>
+           <option  placeholder="Oil Supplier">Select Jerecan Size</option>
+           {% for jerecan in jerecans %}
+           <option value="{{jerecan.id}}">{{jerecan.jon_size}} Liter</option>
+           {% endfor %}
+         </select> {% endcomment %}
+
+         <button type="submit" class="btn btn-secondary">Save Oil Supplier Informations</button>
+       </form>
+   
+
+ </div>
+
+
+{% endblock content %} 

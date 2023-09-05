@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Sticker information{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+    <h1 class=" mb-3 p-3 mt-5">Sticker Information</h1><br><br>
+    <div class="card mb-3 p-3 " style="max-width: 580px;">
+        
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{% static 'img/info.jpg' %}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><u>Sticker Company: {{sticker.sticker_company}}</u></h5>
+              <p class="card-text">Sticker Size: {{sticker.sticker_size}}</p>
+              <p class="card-text">Jerecan Size: {{sticker.jerecan.jon_size}}</p>
+              <p class="card-text">Sticker Price: {{sticker.sticker_price}}</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated {{sticker.created_at}}</small></p>
+              <a href="{% url 'deleteSticking' sticker.id %}" class='btn btn-danger'>Delete</a>
+              <a href="{% url 'stickingPage'  %}" class='btn btn-primary'>Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</main>
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+{% endblock %}

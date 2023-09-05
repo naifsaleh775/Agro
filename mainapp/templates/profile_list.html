@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}Profiles Page{% endblock title %}
+{% block content %}
+{% include 'layouts/navbar.html' %}
+
+<div class="container text-center">
+    <h1 class="text-body-secondary mt-4">Profile List....<h1>
+    
+        <br />
+
+        
+           {% if profiles_user %}
+           {% for profiles_user in profiles_user %}
+
+           <div class="card mb-3 bg-body-secondary" style="max-width: 640px; margin:auto;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{% static 'img\images.png'%}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{profiles_user.user.username}}</h5>
+                  <a href="{% url 'profile' profiles_user.user.id %}" class="card-text fs-4">@Visit{{profiles_user.user.username|lower}} Profile</a>
+                  <p class="card-text fs-6">{{profiles_user.date_modification}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+           
+           
+            {% endfor %}
+
+           {% endif %}
+        
+       
+</div>
+{% endblock content %}

@@ -1,0 +1,141 @@
+{% extends 'layouts/pdf_layout.html' %}
+
+{% block title %}Final Cost{% endblock title %}
+{% block content %}
+{% load static %}
+
+
+
+
+ <div class="div" id="mn">
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="row p-5">
+                        <div class="col-md-6">
+                            <img class="img-logo" src="{% static 'img/Agro_logo.jpg' %}"><br>
+                            <h5 class="text-success ml-4">AGRO 19 GROUP </h5>
+                        </div>
+
+                        <div class="mt-2" style="width: 18rem;">
+                            <div class="card-body">
+                              <h2 class="card-title text-success"><u>Invoice</u></h2>
+                              <p class="">Inv Ref. No. : <b>AG/Inv/2306025</b></p>
+                              <p class="">Payment Terms : <b>TT</b></p>
+                              <p class="">Currency : <b>USD</b></p>
+                              <p class="">Date : <b>15/06/2023</b></p>
+                              
+                            </div>
+                          </div>
+                    </div>
+
+                    
+
+                   
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">No.</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Description</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Qut</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Gross Weight</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Net Weight</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Price (USD)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Software</td>
+                                        <td>LTS Versions</td>
+                                        <td>21</td>
+                                        <td>$321</td>
+                                        <td>$3452</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Software</td>
+                                        <td>Support</td>
+                                        <td>234</td>
+                                        <td>$6356</td>
+                                        <td>$23423</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Software</td>
+                                        <td>Sofware Collection</td>
+                                        <td>4534</td>
+                                        <td>$354</td>
+                                        <td>$23434</td>
+                                    </tr>
+                                    <tr><td colspan="6" class""><b>Total Price:</b> $1500</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row pb-5 p-5">
+                            <div class="col-md-6">
+                                <p class="mb-4"><b>Port of Loading :</b> Port Klang, Malaysia</p>
+                                <p class="mb-4"><b>Port of Discharge:</b> CIF Osh City, Kyrgyzstan Republic</p>
+                                <p class="mb-4"><b>Shipment Time. :</b> June / July 2023</p>
+                                <p class="mb-4"><b>Origin :</b> Malaysia</p>
+                            </div>
+    
+                            <div class="col-md-6 text-right">
+                                <p class="mb-4">Beneficiary :<b> AGRO 19 BERHAD</b></p>
+                                <p class="mb-4">Bank :<b> MALAYAN BANKING</b></p>
+                                <p class="mb-4">Branch :<b> SUNGAI BESI BRANCH</b></p>
+                                <p class="mb-4">Account No. :<b> 714365001240 (USD)</b></p>
+                                <p class="mb-4">Swift Code :<b> MBBEMYKL</b></p>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="text-success">
+                        <hr>
+                      </div>
+                      <div class="mb-3">
+                        <div class="card-body text-center text-success font-italic">
+                          <p class="card-text">Export Factory : No. 1, Jalan SKI 6/KU, Sungai Kapar Indah, Kawasan Perindustrian Hi-Tech, 42200 Klang, Selangor</p>
+                          <p class="card-text">Tel. : +603 3290 7697 Mobile: +60 10 890 6806 sales@agro19bhd.com www.agro19bhd.com</p>
+                        </div>
+                      </div>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% comment %} <button type="button" onclick="generatePdf()" class="btn btn-success text-center">Generate PDF File</button> {% endcomment %}
+
+<script type="text/javascript">
+    function generatePdf(){
+       const element = document.getElementById("mn");
+       var opt = {
+        margin:       1,
+        filename:     'myfile.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+       html2pdf().from(element).set(opt).save();
+    }
+</script>
+
+
+ {% comment %} Footer {% endcomment %}
+ {% comment %} {% include 'layouts/admin_footer.html' %} {% endcomment %}
+ {% comment %} Java Script {% endcomment %}
+ {% comment %} {% include 'layouts/admin_Js.html' %} {% endcomment %}
+
+ 
+{% endblock %}

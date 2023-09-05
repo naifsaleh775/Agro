@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Shipping information{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+    <h1 class=" mb-3 p-3 mt-5">Shipping Information</h1><br><br>
+    <div class="card mb-3 p-3 " style="max-width: 580px;">
+        
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{% static 'img/info.jpg' %}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><u>{{shipping_info.company_name}}</u></h5>
+              <p class="card-text">Direction: {{shipping_info.direction}}</p>
+              <p class="card-text">Price: {{shipping_info.trip_Price}}</p>
+              <p class="card-text">Jerecan: {{shipping_info.jerecan.supplier_name}}- {{shipping_info.jerecan.jon_count}} - {{shipping_info.jerecan.jon_size}} Liter</p>
+              <p class="card-text">Certification: {{shipping_info.certification.cretificate_name}}</p>
+              <p class="card-text">Grossing: {{shipping_info.grossing}}</p>
+              <p class="card-text">Margin: {{shipping_info.margin}}</p>
+              <p class="card-text">Date: {{shipping_info.trip_date}}</p>
+              <p class="card-text">Time: {{shipping_info.trip_Time}}</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated {{shipping_info.created_at}}</small></p>
+              <a href="{% url 'deleteShipping' shipping_info.id %}" class='btn btn-danger'>Delete</a>
+              <a href="{% url 'shipping' %}" class='btn btn-primary'>Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</main>
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+{% endblock %}

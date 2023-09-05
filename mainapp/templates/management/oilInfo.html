@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Oil Supplier information{% endblock title %}
+{% block content %}
+{% load static %}
+{% load multiple %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+
+<main id="main" class="main">
+    <h1 class=" mb-3 p-3 mt-5">Oil Supplier Information</h1><br><br>
+    <div class="card mb-3 p-3 " style="max-width: 580px;">
+        
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{% static 'img/info.jpg' %}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><u><b>Oil Company:</b> {{oil.oil_company}}</u></h5>
+              <p class="card-text"><b>Oil Name:</b> {{oil.oil_name}}</p>
+              <p class="card-text"><b>Oil Quantity:</b> {{oil.oil_quantity}} ton</p>
+              <p class="card-text"><b>Oil Month Selling:</b> {{oil.oil_month_selling}}</p>
+              <p class="card-text"><b>Oil Price in Ton:</b> ${{oil.oil_price}}</p>
+              <p class="card-text"><b>Price of net oil:</b> ${{oil.net_price}}</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated {{oil.created_at}}</small></p>
+              <a href="{% url 'deleteSticking' oil.id %}" class='btn btn-danger'>Delete</a>
+              <a href="{% url 'oilSupplierPage'  %}" class='btn btn-primary'>Back</a>
+            </div>
+          </div>
+        </div>            
+      </div>        
+
+
+</main>
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %} 
+
+
+ <div class='container mt-5'>
+  <b><h1 class="muted text-center ">Add New Sticker</h1></b>
+  <form class='form-control container' method="POST" action="{% url 'add_sticker_modal' %}">
+   {% csrf_token %}
+    
+       <div class="mb-3 mt-3">
+         <input type="text" class="form-control text-center" required name="sticker_company" placeholder="Sticker Company">
+       </div>
+       <div class="mb-3 mt-3">
+           <input type="text" class="form-control text-center" required name="sticker_size" placeholder="Sticker Size">
+         </div>
+         <div class="mb-3 mt-3">
+           <input type="decimal" class="form-control text-center" required name="sticker_price" placeholder="Sticker Price">
+         </div>
+         
+       <button type="submit" class="btn btn-secondary">Save Sticker Informations</button>
+     </form>
+ </div>
+
+
+{% endblock content %} 

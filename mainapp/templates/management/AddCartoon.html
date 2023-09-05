@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %} 
+
+
+ <div class='container mt-5'>
+    <b><h3 class="muted text-center ">Add New Cartoon</h3></b>
+    <form class='form-control container' method="POST" action="{% url 'add_cartoon_modal' %}">
+     {% csrf_token %}
+      
+         <div class="mb-3 mt-3">
+           <input type="text" class="form-control text-center" required name="cartoon_company" placeholder="Cartoon Company">
+         </div>
+         <div class="mb-3 mt-3">
+             <input type="text" class="form-control text-center" required name="cartoon_size" placeholder="Cartoon Size">
+           </div>
+           <div class="mb-3 mt-3">
+             <input type="decimal" class="form-control text-center" required name="cartoon_price" placeholder="Cartoon Price">
+           </div>
+           
+           
+         <button type="submit" class="btn btn-secondary">Save Cartoon Informations</button>
+       </form>
+   
+
+ </div>
+
+
+{% endblock content %} 

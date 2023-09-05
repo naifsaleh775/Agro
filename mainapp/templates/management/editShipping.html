@@ -1,0 +1,112 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Shipping Modification{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_sidebar.html' %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Shipping Modification</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index_dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tabs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" style='width=100%'>
+            <div class="card-body">
+              <h5 class="card-title">Shipping Management</h5>
+
+                <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Shippings Modification</button>
+                </li>
+                
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <b><h3 class="muted text-center small">Modify Shipping</h3></b>
+                   <form class='form-control container' method="POST" action="{% url 'updateShipping' shipping.id %}">
+                    {% csrf_token %}
+                     
+                        <div class="mb-3 mt-3">
+                          <input type="text" class="form-control text-center" value="{{shipping.company_name}}" required name="shipping_name" placeholder="Shipping Name">
+                        </div>
+                          <div class="mb-3 mt-3">
+                            <input type="number" class="form-control text-center" value="{{shipping.trip_Price}}" required name="shipping_price" placeholder="Shipping Price">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="date" class="form-control text-center" value="{{shipping.trip_date}}" required name="shipping_date" placeholder="Shipping Date">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="time" class="form-control text-center" value="{{shipping.trip_Time}}" required name="shipping_time" placeholder="Shipping Time">
+                          </div>
+                      
+                          <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" required name="grossing" placeholder="Add Grossing">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" required name="margin" placeholder="Add Margin">
+                          </div>
+                          
+                          <div class="mb-3 mt-3">
+                            <select class="form-select text-center" name="direction" aria-label="Default select example" required>
+                              <option selected>Select Direction</option>
+                              {% for location in direction %}
+                              <option value="{{location.id}}">{{location.direction}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          <div class="mb-3 mt-3">
+                          <select class="form-select mb-3" name="Jerecan" aria-label="Default select example" value='null' required>
+                            <option selected>Select Jerecan</option>
+                            {% for Jerecan_info in jerecan %}
+                            <option value="{{Jerecan_info.id}}">{{Jerecan_info.supplier_name}}: {{Jerecan_info.jon_count}} - {{Jerecan_info.jon_size}} Liter</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                          <div class="mb-3 mt-3">
+                            <select class="form-select text-center" name="certification_type" aria-label="Default select example" required>
+                              <option selected>Select Certification</option>
+                              {% for cretification in cretifications %}
+                              <option value="{{cretification.id}}">{{cretification.cretificate_name}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                          
+                        <button type="submit" class="btn btn-secondary">Update Shipping Informations</button>
+                      </form>
+                </div>
+                
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+
+ 
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% extends 'layouts/RegisterLayout.html' %}
+
+{% block title %}Login Page{% endblock title %}
+{% block content %}
+{% load static %}
+
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {% for message in messages %}
+  <script>
+		Swal.fire(
+      'Registeration Done',
+      '{{message}}',
+       'success'
+)
+	</script>
+  {% endfor %}
+  <main>
+    <div class="container">
+      
+      <div class="main-w3layouts wrapper">
+        <h1 style="color:gray;">Login</h1>
+        <div class="main-agileinfo">
+          <div class="agileits-top">
+           
+            <form action="{% url 'login_user' %}" method="post">
+              {% csrf_token %}
+              <input class="text mb-4" type="text" name="username" placeholder="Username" required="">
+              <input class="text" type="password" name="password" placeholder="Password" required="">
+              <div class="wthree-text">
+                
+                <div class="clear"> </div>
+              </div>
+              <input type="submit" value="SIGNIN">
+            </form>
+            <p>Don't have an Account? <a href="{% url 'register_user' %}"> Register now!</a></p>
+          </div>
+        </div>
+        <!-- copyright -->
+        <div class="colorlibcopy-agile">
+          &copy; Copyright <strong><span>Naif</span></strong>. All Rights Reserved<br>
+          Designed by <a href="#">Alf Ba Company</a>
+        </div>
+        <div class="credits">
+         
+       </div>
+        <!-- //copyright -->
+        <ul class="colorlib-bubbles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <!-- //main -->
+    
+        </div>
+                       
+  </main><!-- End #main -->
+
+ 
+  {% comment %} Java Script {% endcomment %}
+  {% include 'layouts/admin_Js.html' %}
+{% endblock %}
+ 

@@ -1,0 +1,108 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Certifications{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_sidebar.html' %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Certifications</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index_dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tabs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" style='width=100%'>
+            <div class="card-body">
+              <h5 class="card-title">Certifications Management</h5>
+
+              {% for message in messages %}
+                    <div class="alert alert-success small"><b>{{message}}</b></div>
+              {% endfor %}
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All Certifications  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Create New Certification</button>
+                </li>
+               
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <table class="table datatable p-5 text-center">
+                        <thead>
+                          <tr>
+                            
+                            <th scope="col">Certification Name</th>
+                            <th scope="col">Certification Price</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for certification in certifications %}
+                          <tr>
+                            
+                            <td>{{certification.cretificate_name}}</td>
+                            <td>{{certification.cretificate_price}}</td>
+                            <td>
+                              <a href="{% url 'certificationEdit' certification.id %}"  class='btn btn-outline-primary'>edit</a>
+                              <a href="{% url 'certificationDelete' certification.id %}" class='btn btn-outline-danger'>delete</a>
+                              <a href="{% url 'certificattionInfo' certification.id %}" class='btn btn-outline-info'>info</a>
+                            </td>
+                              
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <b><h3 class="muted text-center small">Add New Cretification</h3></b>
+                   <form class='form-control container' method="POST" action="">
+                    {% csrf_token %}
+                     
+                        <div class="mb-3 mt-3">
+                          <input type="text" class="form-control text-center" required name="certification_name" placeholder="Certification Name">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" required name="certification_price" placeholder="Certification Price">
+                          </div>
+                      
+                        <button type="submit" class="btn btn-secondary">Save Certification Informations</button>
+                      </form>
+                  
+                </div>
+                
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+
+ 
+{% endblock %}

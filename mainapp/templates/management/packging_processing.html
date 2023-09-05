@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Packging Processing {% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_sidebar.html' %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Packging Processing and Loading</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index_dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tabs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" style='width=100%'>
+            <div class="card-body">
+              <h5 class="card-title">Packging Processing and Loading</h5>
+
+              {% for message in messages %}
+                    <div class="alert alert-success small"><b>{{message}}</b></div>
+              {% endfor %}
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Packging Processing</button>
+                </li>
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <table class="table datatable p-5 text-center">
+                        <thead class="bg-secondary-subtle">
+                          <tr>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">Shipping Direction</th>
+                            <th scope="col" class="text-center">Action</th>
+                          </tr>
+                         </thead>
+                        <tbody>
+                            {% for shipping in shippings %}
+                          <tr>
+                            <td><b>{{shipping.id}}</b></td>
+                            <td><b>{{shipping.direction}}</b></td>
+                            <td> <a href="{% url 'outPutPage' shipping.id %}" class='btn btn-outline-info'>Display</a></td>
+                          </tr>
+                         {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+                
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+
+ 
+{% endblock %}

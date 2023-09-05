@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Cartoon information{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+    <h1 class=" mb-3 p-3 mt-5">Cartoon Information</h1><br><br>
+    <div class="card mb-3 p-3 " style="max-width: 580px;">
+        
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{% static 'img/info.jpg' %}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><u>Cartoon Company: {{cartoon.cartoon_company}}</u></h5>
+              <p class="card-text">Cartoon Size: {{cartoon.cartoon_size}} Liter</p>
+              <p class="card-text">Jerecan Size: {{cartoon.jearecane.jon_size}} Liter</p>
+              <p class="card-text">Cartoon Price: {{cartoon.cartoon_price}}</p>
+              <p class="card-text"><small class="text-body-secondary">Last updated {{cartoon.created_at}}</small></p>
+              <a href="{% url 'deleteCartoon' cartoon.id %}" class='btn btn-danger'>Delete</a>
+              <a href="{% url 'cartoonPage'  %}" class='btn btn-primary'>Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</main>
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Stickers Modification{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_sidebar.html' %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Stickers Modification</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index_dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tabs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" style='width=100%'>
+            <div class="card-body">
+              <h5 class="card-title">Stickers Management</h5>
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Edit Sticker</button>
+                </li>
+                
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <b><h3 class="muted text-center small">Edit Sticker</h3></b>
+                   <form class='form-control container' method="POST" action="{% url 'updateSticking' sticker.id %}">
+                    {% csrf_token %}
+                     
+                        <div class="mb-3 mt-3">
+                          <input type="text" class="form-control text-center" value="{{sticker.sticker_company}}" required name="sticker_company" placeholder="Sticker Company">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" value="{{sticker.sticker_size}}" required name="sticker_size" placeholder="Sticker Size">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="decimal" class="form-control text-center" value="{{sticker.sticker_price}}" required name="sticker_price" placeholder="Sticker Price">
+                          </div>
+                        
+                        <button type="submit" class="btn btn-secondary">Update Sticker Informations</button>
+                        <a href="{% url 'stickingPage' %}" class="btn btn-info">Back to All Stickers</a>
+                      </form>
+                </div>
+                
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+
+ 
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Shipping{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_sidebar.html' %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Shipping</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index_dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tabs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" style='width=100%'>
+            <div class="card-body">
+              <h5 class="card-title">Shipping Management</h5>
+
+              {% for message in messages %}
+                    <div class="alert alert-success small"><b>{{message}}</b></div>
+              {% endfor %}
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All Shippings</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Create New Shipping</button>
+                </li>
+               
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <table class="table datatable p-5 text-center">
+                        <thead>
+                          <tr>
+                            
+                            <th scope="col">Name</th>
+                            <th scope="col">Direction</th>
+                            <th scope="col">Shipping Price</th>
+                            <th scope="col">Action</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for shipping in shippings %}
+                          <tr>
+                            
+                            <td>{{shipping.company_name}}</td>
+                            <td>{{shipping.direction}}</td>
+                            <td>${{shipping.trip_Price}}</td>
+                            <td>
+                              <a href="{% url 'editShipping' shipping.id %}"  class='btn btn-outline-primary' >edit</a>
+                              <a href="{% url 'deleteShipping' shipping.id %}" class='btn btn-outline-danger'>delete</a>
+                              <a href="{% url 'shippingInfo' shipping.id %}" class='btn btn-outline-info'>info</a>
+                            </td>
+                          </tr>
+                          {% endfor %} 
+                        </tbody>
+                      </table>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <b><h3 class="muted text-center small">Add New Shipping</h3></b>
+                   <form class='form-control container' method="POST" action="#">
+                    {% csrf_token %}
+                     
+                        <div class="mb-3 mt-3">
+                          <input type="text" class="form-control text-center"  required name="shipping_name" placeholder="Shipping Name">
+                        </div>
+                         <div class="mb-3 mt-3">
+                            <input type="number" class="form-control text-center" required name="shipping_price" placeholder="Shipping Price">
+                          </div>
+                          
+                          <div class="mb-3 mt-3">
+                            <input type="date" class="form-control text-center" required name="shipping_date" placeholder="Shipping Date">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="time" class="form-control text-center" required name="shippin_time" placeholder="Shipping Time">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" required name="grossing" placeholder="Add Grossing">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" required name="margin" placeholder="Add Margin">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <select class="form-select text-center" name="direction" aria-label="Default select example" required>
+                              <option selected>Select Direction</option>
+                              {% for location in direction %}
+                              <option value="{{location.id}}">{{location.direction}}</option>
+                              {% endfor %}
+                            </select>
+                            <a href="{% url 'AddShippingDirectionModal' %}"><i class="bi bi-file-plus-fill fs-2"></i></a>
+                          </div>
+                         
+                          <select class="form-select mb-3" name="Jerecan" aria-label="Default select example" value='null'>
+                            <option selected>Select Jerecan</option>
+                            {% for Jerecan in jerecans %}
+                            <option value="{{Jerecan.id}}">{{Jerecan.supplier_name}}: {{Jerecan.jon_count}} - {{Jerecan.jon_size}} Liter</option>
+                            {% endfor %}
+                          </select>
+                          <div class="mb-3 mt-3">
+                            <select class="form-select text-center" name="certification_type" aria-label="Default select example">
+                              <option selected>Select Certification</option>
+                              {% for cretification in cretifications %}
+                              <option value="{{cretification.id}}">{{cretification.cretificate_name}}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                      
+                        <button type="submit" class="btn btn-secondary">Save Shipping Informations</button>
+                      </form>
+                  
+                </div>
+                
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+
+ 
+{% endblock %}

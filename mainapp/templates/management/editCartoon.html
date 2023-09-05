@@ -1,0 +1,77 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Cartoons Modification{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_sidebar.html' %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Cartoons Modification</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index_dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tabs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" style='width=100%'>
+            <div class="card-body">
+              <h5 class="card-title">Cartoons Management</h5>
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Edit Cartoon</button>
+                </li>
+                
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <b><h3 class="muted text-center small">Edit Cartoon</h3></b>
+                   <form class='form-control container' method="POST" action="{% url 'updateCartoon' cartoon.id %}">
+                    {% csrf_token %}
+                     
+                        <div class="mb-3 mt-3">
+                          <input type="text" class="form-control text-center" value="{{cartoon.cartoon_company}}" required name="cartoon_company" placeholder="Sticker Company">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" value="{{cartoon.cartoon_size}}" required name="cartoon_size" placeholder="Sticker Size">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="decimal" class="form-control text-center" value="{{cartoon.cartoon_price}}" required name="cartoon_price" placeholder="Sticker Price">
+                          </div>
+                          
+                        <button type="submit" class="btn btn-secondary">Update Cartoon Informations</button>
+                        <a href="{% url 'cartoonPage' %}" class="btn btn-info">Back to All Cartoons</a>
+                      </form>
+                </div>
+                
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+
+ 
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Sticker Management{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_sidebar.html' %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Stickers</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index_dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tabs</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card" style='width=100%'>
+            <div class="card-body">
+              <h5 class="card-title">Sticker Management</h5>
+
+              {% for message in messages %}
+                    <div class="alert alert-success small"><b>{{message}}</b></div>
+              {% endfor %}
+              <!-- Default Tabs -->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">All Stickers</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Create New Sticker</button>
+                </li>
+               
+              </ul>
+              <div class="tab-content pt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <table class="table datatable p-5 text-center">
+                        <thead>
+                          <tr>
+                            
+                            <th scope="col">Sticker Company</th>
+                            <th scope="col">Stiker Size</th>
+                            <th scope="col">Sticker Price</th>
+                            <th scope="col">Action</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for sticker in stickers %}
+                          <tr>
+                            
+                            <td>{{sticker.sticker_company}}</td>
+                            <td>{{sticker.sticker_size}}</td>
+                            <td>${{sticker.sticker_price}}</td>
+                            <td>
+                              <a href="{% url 'editSticking' sticker.id %}"  class='btn btn-outline-primary'>edit</a>
+                              <a href="{% url 'deleteSticking' sticker.id %}" class='btn btn-outline-danger'>delete</a>
+                              <a href="{% url 'stickingInfo' sticker.id %}" class='btn btn-outline-info'>info</a>
+                            </td>
+                              
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <b><h3 class="muted text-center small">Add New Sticker</h3></b>
+                   <form class='form-control container' method="POST" action="{% url 'stickingPage' %}">
+                    {% csrf_token %}
+                     
+                        <div class="mb-3 mt-3">
+                          <input type="text" class="form-control text-center" required name="sticker_company" placeholder="Sticker Company">
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <input type="text" class="form-control text-center" required name="sticker_size" placeholder="Sticker Size">
+                          </div>
+                          <div class="mb-3 mt-3">
+                            <input type="decimal" class="form-control text-center" required name="sticker_price" placeholder="Sticker Price">
+                          </div>
+                          
+                        <button type="submit" class="btn btn-secondary">Save Sticker Informations</button>
+                      </form>
+                  
+                </div>
+                
+              </div><!-- End Default Tabs -->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+
+ 
+{% endblock %}

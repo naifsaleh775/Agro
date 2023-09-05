@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+{% load multiple %}
+{% block title %}Supplier information{% endblock title %}
+{% block content %}
+{% load static %}
+{% include 'layouts/admin_navbar.html' %}
+
+
+<main id="main" class="main">
+    <h1 class=" mb-3 p-3 mt-5">Supplier Information</h1><br><br>
+    <div class="card mb-3 p-3 " style="max-width: 580px;">
+        
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{% static 'img/info.jpg' %}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><u>Company Name: {{supplier_info.supplier_name}}</u></h5>
+              <p class="card-text">Size: {{supplier_info.jon_size}} Liter</p>
+              <p class="card-text">Quantity: {{supplier_info.jon_count}}</p>
+              <p class="card-text">Price: {{supplier_info.joi_price}}</p>
+              <p class="card-text">Ton / Liter: {{supplier_info.value_ofTonToLiter}}</p>
+              <p class="card-text">Price per Liter: {{supplier_info.loadding}}</p>
+              <p class="card-text">Sticker-Size: {{supplier_info.jerecan_sticker.sticker_size}} Liter</p>
+              
+              <p class="card-text"><small class="text-body-secondary">Last updated {{supplier_info.created_at}}</small></p>
+              <a href="{% url 'deleteSupplier' supplier_info.id %}" class='btn btn-danger'>Delete</a>
+              <a href="{% url 'supplier'  %}" class='btn btn-primary'>Back</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+</main>
+
+
+ {% comment %} Footer {% endcomment %}
+ {% include 'layouts/admin_footer.html' %}
+ {% comment %} Java Script {% endcomment %}
+ {% include 'layouts/admin_Js.html' %}
+{% endblock %}

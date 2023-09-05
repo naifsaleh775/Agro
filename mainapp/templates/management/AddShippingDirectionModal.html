@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %} 
+
+
+ <div class='container mt-5'>
+    <b><h3 class="muted text-center ">Add New Shipping Direction</h3></b>
+    <form class='form-control container' method="POST" action="{% url 'add_shipping_direction_modal' %}">
+     {% csrf_token %}
+      
+     <b><h3 class="muted text-center"> Shipping Direction</h3></b>
+                   <form class='form-control container' method="POST" action="">
+                    {% csrf_token %}
+                     
+                        <div class="mb-3 mt-3">
+                          <input type="text" class="form-control text-center" required name="direction" placeholder="Shipping Direction">
+                        </div>
+                       
+                       
+                       
+                        <button type="submit" class="btn btn-secondary">Save Shipping Direction Informations</button>
+                      </form>
+                  
+
+ </div>
+
+
+{% endblock content %} 
